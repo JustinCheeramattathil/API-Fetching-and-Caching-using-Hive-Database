@@ -2,9 +2,11 @@ import 'package:app/controllers/provider/auth_provider.dart';
 import 'package:app/views/home_screen.dart';
 import 'package:app/views/loginScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main()async {
+   await Hive.initFlutter();
   runApp(const MyApp());
 }
 
