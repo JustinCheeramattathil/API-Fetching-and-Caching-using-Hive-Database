@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app/controllers/services/home_api_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -30,9 +32,7 @@ class HomeProvider extends ChangeNotifier {
       _leads = await _homeService.getLeadsFromDatabase();
       notifyListeners();
     } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching leads: $e');
-      }
+      log(e.toString());
     }
   }
 }

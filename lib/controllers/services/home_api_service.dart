@@ -7,21 +7,20 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeService {
-
   Future<void> addToDatabase(Response response) async {
     try {
       Box<Lead> leadBox = await Hive.openBox<Lead>('leads');
       List<dynamic> data = response.data['data']['leads'];
       for (var leadData in data) {
         Lead lead = Lead.fromJson(leadData);
-        leadBox.add(lead); 
+        leadBox.add(lead);
       }
     } catch (e) {
       rethrow;
     }
   }
 
-   Future<List<Lead>> getLeadsFromDatabase() async {
+  Future<List<Lead>> getLeadsFromDatabase() async {
     try {
       Box<Lead> leadBox = await Hive.openBox<Lead>('leads');
       List<Lead> leadsList = leadBox.values.toList();
@@ -30,8 +29,8 @@ class HomeService {
       rethrow;
     }
   }
-  
-  Future<Response> fetchLeadList() async {  
+
+  Future<Response> fetchLeadList() async {
     try {
       Dio dio = Dio();
       SharedPreferences pref = await SharedPreferences.getInstance();
@@ -46,10 +45,11 @@ class HomeService {
         ),
       );
       log('message:${response.statusCode.toString()}');
-      return response;  
+      await addToDatabase(response);
+      return response;
     } catch (e) {
       log('failed:${e.toString()}');
-      rethrow;  
+      rethrow;
     }
   }
 }
