@@ -1,5 +1,4 @@
 import 'package:app/controllers/provider/home_provider.dart';
-import 'package:app/models/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +9,36 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+              height: 10,
+              width: 10,
+              child: Image.asset(
+                'assets/images/menu.png',
+              )),
+        ),
+        title: const Text(
+          'Lead List',
+          style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 2, 47, 83)),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+                height: 40,
+                width: 40,
+                child: Image.asset(
+                  'assets/images/bell1.png',
+                )),
+          ),
+        ],
+      ),
       body: Consumer<HomeProvider>(
         builder: (context, homeProvider, _) {
           if (homeProvider.leads.isEmpty) {
